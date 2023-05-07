@@ -15,7 +15,7 @@ jobs:
   kirkstone-weston:
   
     env:
-      MACHINE: stm32mp15-disco
+      MACHINE: stm32mp15-eval
       DISTRO: openstlinux-weston
       WORKSPACE: stm32mp15-kirkstone
       FLAVOR: weston
@@ -50,9 +50,9 @@ jobs:
           [ -d ../${{ env.WORKSPACE }} ] || mkdir -p ../${{ env.WORKSPACE }}
           cd ../${{ env.WORKSPACE }}
           rm -rf layers
-          git config --global user.name "Joel Winarske"
-          git config --global user.email "joel.winarske@gmail.com"
-          /home/dev/bin/repo init -u https://github.com/STMicroelectronics/oe-manifest.git -b refs/tags/openstlinux-5.15-yocto-kirkstone-mp1-v22.07.27
+          git config --global user.name "Eric Wu"
+          git config --global user.email "eric3u@outlook.com"
+          /home/dev/bin/repo init -u https://github.com/STMicroelectronics/oe-manifest.git -b refs/tags/openstlinux-5.15-yocto-kirkstone-mp1-v22.11.23
           /home/dev/bin/repo sync --force-sync --no-clone-bundle -j `grep -c ^processor /proc/cpuinfo` &
           git clone -b kirkstone https://github.com/kraj/meta-clang.git layers/meta-clang &
           wait
@@ -145,6 +145,6 @@ jobs:
       - name: Publish OS image artifact
         uses: actions/upload-artifact@v3
         with:
-          name: sdcard_stm32mp157f-dk2-optee-weston
+          name: sdcard_stm32mp157f-eval-optee-weston
           path: |
              /home/dev/artifacts/*
